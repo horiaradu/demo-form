@@ -1,1 +1,8 @@
 <app-demo-form [entity]="e"></app-demo-form>
+
+<br/>
+<br/>
+
+<button (click)="toggleModal()">toggle</button>
+
+<app-dumb-modal *ngIf="showModal" [entity]="e"></app-dumb-modal>

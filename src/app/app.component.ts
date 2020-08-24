@@ -10,9 +10,15 @@ export class AppComponent {
   title = "demo-form";
   e: Entity;
 
+  showModal = false;
+
   constructor(private entityService: EntityService) {}
 
   ngOnInit() {
     this.entityService.fetchEntity().subscribe((e: Entity) => (this.e = e));
+  }
+
+  toggleModal() {
+    this.showModal = !this.showModal;
   }
 }
