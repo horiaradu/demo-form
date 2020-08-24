@@ -8,17 +8,20 @@ import { EntityService, Entity } from "./entity-service.service";
 })
 export class AppComponent {
   title = "demo-form";
-  e: Entity;
 
   showModal = false;
 
   constructor(private entityService: EntityService) {}
 
   ngOnInit() {
-    this.entityService.fetchEntity().subscribe((e: Entity) => (this.e = e));
+    this.entityService.fetchEntity();
   }
 
   toggleModal() {
     this.showModal = !this.showModal;
+  }
+
+  get e() {
+    return this.entityService.entity$;
   }
 }

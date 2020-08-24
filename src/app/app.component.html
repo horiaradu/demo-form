@@ -1,8 +1,8 @@
-<app-demo-form [entity]="e"></app-demo-form>
+<app-demo-form [entity]="e | async"></app-demo-form>
 
 <br/>
 <br/>
 
 <button (click)="toggleModal()">toggle</button>
 
-<app-dumb-modal *ngIf="showModal" [entity]="e"></app-dumb-modal>
+<app-dumb-modal *ngIf="showModal" [entity]="e | async"></app-dumb-modal>

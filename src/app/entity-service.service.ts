@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { of, Observable } from "rxjs";
+import { of, Observable, BehaviorSubject, Subject } from "rxjs";
 
 export interface Entity {
   id: number;
@@ -10,17 +10,19 @@ export interface Entity {
   providedIn: "root",
 })
 export class EntityService {
+  entity$ = new BehaviorSubject<Entity>(null);
+
   constructor() {}
 
-  fetchEntity(): Observable<Entity> {
-    return of({
+  fetchEntity() {
+    of({
       id: 1,
       name: "name",
-    });
+    }).subscribe((e) => this.entity$.next(e));
   }
 
-  saveEntity(payload: Entity): Observable<Entity> {
+  saveEntity(payload: Entity) {
     console.log(payload);
-    return of(payload);
+    of(payload).subscribe((e) => this.entity$.next(e));
   }
 }
