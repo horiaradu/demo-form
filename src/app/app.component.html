@@ -4,5 +4,9 @@
 <br/>
 
 <button (click)="toggleModal()">toggle</button>
+<button (click)="refresh()">refresh</button>
+
+<br/>
+<br/>
 
 <app-dumb-modal *ngIf="showModal" [entity]="e | async"></app-dumb-modal>

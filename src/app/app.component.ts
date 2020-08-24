@@ -21,6 +21,10 @@ export class AppComponent {
     this.showModal = !this.showModal;
   }
 
+  refresh() {
+    this.entityService.refresh();
+  }
+
   get e() {
     return this.entityService.entity$;
   }

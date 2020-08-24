@@ -18,6 +18,10 @@ export class DemoFormComponent implements OnInit {
     this.form = new FormGroup({
       name: new FormControl(this.entity.name),
     });
+
+    this.form.valueChanges.subscribe((formValues) => {
+      this.entityService.saveLocally({ id: this.entity.id, ...formValues });
+    });
   }
 
   save() {

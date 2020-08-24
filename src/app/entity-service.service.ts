@@ -11,18 +11,27 @@ export interface Entity {
 })
 export class EntityService {
   entity$ = new BehaviorSubject<Entity>(null);
+  serverState = {
+    id: 1,
+    name: "name",
+  };
 
   constructor() {}
 
   fetchEntity() {
-    of({
-      id: 1,
-      name: "name",
-    }).subscribe((e) => this.entity$.next(e));
+    of(this.serverState).subscribe((e) => this.entity$.next(e));
+  }
+
+  saveLocally(entity: Entity) {
+    this.entity$.next(entity);
   }
 
   saveEntity(payload: Entity) {
-    console.log(payload);
+    this.serverState = { ...payload };
     of(payload).subscribe((e) => this.entity$.next(e));
+  }
+
+  refresh() {
+    this.entity$.next(this.serverState);
   }
 }
