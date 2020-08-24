@@ -1,4 +1,10 @@
-import { Component, OnInit, Input } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges,
+} from "@angular/core";
 import { Entity, EntityService } from "../entity-service.service";
 import { FormGroup, FormControl } from "@angular/forms";
 
@@ -7,7 +13,7 @@ import { FormGroup, FormControl } from "@angular/forms";
   templateUrl: "./demo-form.component.html",
   styleUrls: ["./demo-form.component.scss"],
 })
-export class DemoFormComponent implements OnInit {
+export class DemoFormComponent implements OnInit, OnChanges {
   @Input() entity: Entity;
 
   form: FormGroup;
@@ -22,6 +28,11 @@ export class DemoFormComponent implements OnInit {
     this.form.valueChanges.subscribe((formValues) => {
       this.entityService.saveLocally({ id: this.entity.id, ...formValues });
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    const { name } = changes.entity.currentValue;
+    this.form && this.form.patchValue({ name });
   }
 
   save() {
